@@ -251,7 +251,7 @@ module Reclaim
       puts "Category: #{task.event_category}" if task.event_category
       puts "Color: #{task.event_color}" if task.event_color
       puts "Notes: #{task.notes}" if task.notes && !task.notes.empty?
-    rescue NotFoundError => e
+    rescue NotFoundError
       puts "✗ Task #{task_id} not found"
       exit(1)
     end
@@ -259,7 +259,7 @@ module Reclaim
     def self.update_task(client, task_id, options)
       task = client.update_task(task_id, **options)
       puts "✓ Updated task: #{task.title}"
-    rescue NotFoundError => e
+    rescue NotFoundError
       puts "✗ Task #{task_id} not found"
       exit(1)
     rescue InvalidRecordError => e
@@ -270,7 +270,7 @@ module Reclaim
     def self.complete_task(client, task_id)
       task = client.complete_task(task_id)
       puts "✓ Completed task: #{task.title}"
-    rescue NotFoundError => e
+    rescue NotFoundError
       puts "✗ Task #{task_id} not found"
       exit(1)
     end
@@ -278,7 +278,7 @@ module Reclaim
     def self.delete_task(client, task_id)
       client.delete_task(task_id)
       puts "✓ Deleted task: #{task_id}"
-    rescue NotFoundError => e
+    rescue NotFoundError
       puts "✗ Task #{task_id} not found"
       exit(1)
     end

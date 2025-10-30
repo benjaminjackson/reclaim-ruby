@@ -1,0 +1,52 @@
+# MCP Server Configuration
+# This file defines available MCP servers and their installation commands
+# Used by mcp-manager gem for easy server management
+
+servers:
+  asana-remote:
+    description: "Asana task management (OAuth)"
+    command: "claude mcp add asana-remote -- npx -y mcp-remote https://mcp.asana.com/sse"
+    env_vars: []
+
+  google-workspace:
+    description: "Gmail/Calendar integration (requires OAuth credentials)"
+    command: 'claude mcp add google-workspace -s local -e GOOGLE_OAUTH_CLIENT_ID="$GOOGLE_OAUTH_CLIENT_ID" -e GOOGLE_OAUTH_CLIENT_SECRET="$GOOGLE_OAUTH_CLIENT_SECRET" -e OAUTHLIB_INSECURE_TRANSPORT="1" -- uvx workspace-mcp@latest --tools gmail calendar'
+    env_vars:
+      - GOOGLE_OAUTH_CLIENT_ID
+      - GOOGLE_OAUTH_CLIENT_SECRET
+
+  github:
+    description: "GitHub repository integration (requires Personal Access Token)"
+    command: 'claude mcp add github -s local -e GITHUB_PERSONAL_ACCESS_TOKEN="$GITHUB_PERSONAL_ACCESS_TOKEN" -- docker run -i --rm -e GITHUB_PERSONAL_ACCESS_TOKEN ghcr.io/github/github-mcp-server'
+    env_vars:
+      - GITHUB_PERSONAL_ACCESS_TOKEN
+
+  ynab:
+    description: "You Need A Budget integration"
+    command: 'claude mcp add ynab -- npx -y ynab-mcp-server@latest -e YNAB_API_TOKEN=$YNAB_API_TOKEN -e YNAB_BUDGET_ID=$YNAB_BUDGET_ID'
+    env_vars:
+      - YNAB_API_TOKEN
+      - YNAB_BUDGET_ID
+
+  gemini-cli:
+    description: "Google's Gemini AI integration"
+    command: "claude mcp add gemini-cli -- npx -y gemini-mcp-tool"
+    env_vars: []
+
+  context7:
+    description: "Up-to-date library documentation and code examples"
+    command: "claude mcp add context7 -- npx -y @upstash/context7-mcp"
+    env_vars: []
+
+  exa:
+    description: "Exa search API"
+    command: 'claude mcp add exa -e EXA_API_KEY="$EXA_API_KEY" -- npx -y exa-mcp-server'
+    env_vars:
+      - EXA_API_KEY
+
+  slack:
+    description: "Slack integration for team communication"
+    command: 'claude mcp add slack -s local -e SLACK_MCP_XOXC_TOKEN="$SLACK_MCP_XOXC_TOKEN" -e SLACK_MCP_XOXD_TOKEN="$SLACK_MCP_XOXD_TOKEN" -- npx -y slack-mcp-server@latest --transport stdio'
+    env_vars:
+      - SLACK_MCP_XOXC_TOKEN
+      - SLACK_MCP_XOXD_TOKEN

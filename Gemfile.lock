@@ -1,0 +1,24 @@
+PATH
+  remote: .
+  specs:
+    reclaim (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.26.0)
+    rake (13.3.1)
+    yard (0.9.37)
+
+PLATFORMS
+  arm64-darwin-22
+  ruby
+
+DEPENDENCIES
+  minitest (~> 5.0)
+  rake (~> 13.0)
+  reclaim!
+  yard (~> 0.9)
+
+BUNDLED WITH
+   2.7.1

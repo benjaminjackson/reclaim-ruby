@@ -6,6 +6,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    dotenv (2.8.1)
     minitest (5.26.0)
     rake (13.3.1)
     yard (0.9.37)
@@ -15,6 +16,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv (~> 2.8)
   minitest (~> 5.0)
   rake (~> 13.0)
   reclaim!

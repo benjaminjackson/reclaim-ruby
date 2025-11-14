@@ -35,7 +35,7 @@ gem 'reclaim'
 Set your Reclaim.ai API token as an environment variable:
 
 ```bash
-export RECLAIM_TOKEN='your_api_token_here'
+export RECLAIM_API_KEY='your_api_token_here'
 ```
 
 Get your API token from your [Reclaim.ai settings](https://app.reclaim.ai/settings/developer).
@@ -46,7 +46,7 @@ If you have the `dotenv` gem installed, the library will automatically load envi
 
 ```bash
 # .env
-RECLAIM_TOKEN='your_api_token_here'
+RECLAIM_API_KEY='your_api_token_here'
 ```
 
 **For users of this gem**: If you're using reclaim-ruby as a library in your own project and want .env file support, add dotenv to your project's Gemfile:
@@ -66,7 +66,7 @@ gem 'dotenv', '~> 2.8'
 ```ruby
 require 'reclaim'
 
-# Initialize client (uses ENV['RECLAIM_TOKEN'] by default)
+# Initialize client (uses ENV['RECLAIM_API_KEY'] by default)
 client = Reclaim::Client.new
 
 # Or pass token explicitly
@@ -286,7 +286,7 @@ bundle install
 # Run unit tests only (no API calls)
 SKIP_INTEGRATION_TESTS=true bundle exec rake test
 
-# Run all tests (requires RECLAIM_TOKEN)
+# Run all tests (requires RECLAIM_API_KEY)
 bundle exec rake test
 
 # Run only integration tests
@@ -308,7 +308,7 @@ Main client for API interactions.
 
 **Methods:**
 
-- `initialize(token = nil)` - Create client (uses ENV['RECLAIM_TOKEN'] if token not provided)
+- `initialize(token = nil)` - Create client (uses ENV['RECLAIM_API_KEY'] if token not provided)
 - `create_task(**options)` - Create a new task
 - `list_tasks(filter: nil)` - List all tasks (filter: :active, :completed, :overdue, or nil)
 - `get_task(task_id)` - Get a specific task by ID

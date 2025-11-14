@@ -11,8 +11,8 @@ module Reclaim
     BASE_URL = 'https://api.app.reclaim.ai/api'
 
     def initialize(token = nil)
-      @token = token || ENV['RECLAIM_TOKEN']
-      raise AuthenticationError, 'RECLAIM_TOKEN environment variable not set' unless @token
+      @token = token || ENV['RECLAIM_API_KEY']
+      raise AuthenticationError, 'RECLAIM_API_KEY environment variable not set' unless @token
 
       @time_schemes_cache = nil
     end

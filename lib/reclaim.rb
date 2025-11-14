@@ -7,7 +7,7 @@
 # time scheme resolution, and caching.
 #
 # Environment Variables:
-#   RECLAIM_TOKEN - Your Reclaim API token
+#   RECLAIM_API_KEY - Your Reclaim API token
 #
 # Usage:
 #   require 'reclaim'

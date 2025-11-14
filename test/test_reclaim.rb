@@ -122,13 +122,13 @@ end
 class TestReclaimClient < Minitest::Test
   def setup
     # Set a test token for unit tests
-    @original_token = ENV['RECLAIM_TOKEN']
-    ENV['RECLAIM_TOKEN'] = 'test_token_12345'
+    @original_token = ENV['RECLAIM_API_KEY']
+    ENV['RECLAIM_API_KEY'] = 'test_token_12345'
     @client = Reclaim::Client.new
   end
 
   def teardown
-    ENV['RECLAIM_TOKEN'] = @original_token
+    ENV['RECLAIM_API_KEY'] = @original_token
   end
 
   def test_client_initialization_with_token
@@ -137,17 +137,17 @@ class TestReclaimClient < Minitest::Test
   end
 
   def test_client_initialization_without_token
-    ENV['RECLAIM_TOKEN'] = nil
+    ENV['RECLAIM_API_KEY'] = nil
     
     error = assert_raises(Reclaim::AuthenticationError) do
       Reclaim::Client.new
     end
     
-    assert_equal 'RECLAIM_TOKEN environment variable not set', error.message
+    assert_equal 'RECLAIM_API_KEY environment variable not set', error.message
   end
 
   def test_client_initialization_with_env_token
-    ENV['RECLAIM_TOKEN'] = 'env_token_test'
+    ENV['RECLAIM_API_KEY'] = 'env_token_test'
     client = Reclaim::Client.new
     
     assert_instance_of Reclaim::Client, client
@@ -408,9 +408,9 @@ class TestReclaimIntegration < Minitest::Test
     end
     
     # Validate we have a real API token
-    token = ENV['RECLAIM_TOKEN']
+    token = ENV['RECLAIM_API_KEY']
     if !token || token == 'test_token_12345'
-      skip "Real RECLAIM_TOKEN required for integration tests"
+      skip "Real RECLAIM_API_KEY required for integration tests"
     end
     
     @client = Reclaim::Client.new(token)
@@ -655,14 +655,14 @@ class TestReclaimCLI < Minitest::Test
     @original_argv = ARGV.dup
     
     # Mock environment variable for tests
-    @original_token = ENV['RECLAIM_TOKEN']
-    ENV['RECLAIM_TOKEN'] = 'test_token_for_cli_tests'
+    @original_token = ENV['RECLAIM_API_KEY']
+    ENV['RECLAIM_API_KEY'] = 'test_token_for_cli_tests'
   end
   
   def teardown
     # Restore original ARGV and environment
     ARGV.replace(@original_argv)
-    ENV['RECLAIM_TOKEN'] = @original_token
+    ENV['RECLAIM_API_KEY'] = @original_token
   end
   
   def test_default_command_and_filter_logic
@@ -891,12 +891,12 @@ end
 
 class TestReclaimEnv < Minitest::Test
   def setup
-    @original_token = ENV['RECLAIM_TOKEN']
+    @original_token = ENV['RECLAIM_API_KEY']
     @original_load_path = $LOAD_PATH.dup
   end
 
   def teardown
-    ENV['RECLAIM_TOKEN'] = @original_token
+    ENV['RECLAIM_API_KEY'] = @original_token
     $LOAD_PATH.replace(@original_load_path)
   end
 
@@ -964,13 +964,13 @@ class TestReclaimEnv < Minitest::Test
 
     begin
       FileUtils.mkdir_p(test_project_dir)
-      File.write(env_file, "RECLAIM_TOKEN=integration_test_token\n")
+      File.write(env_file, "RECLAIM_API_KEY=integration_test_token\n")
 
-      # Run in subprocess with clean environment (unset RECLAIM_TOKEN)
+      # Run in subprocess with clean environment (unset RECLAIM_API_KEY)
       lib_path = File.expand_path('../../lib', __FILE__)
       result = Dir.chdir(test_project_dir) do
-        # Use env to unset RECLAIM_TOKEN before running ruby
-        `env -u RECLAIM_TOKEN ruby -I#{lib_path} -e "require 'reclaim'; puts ENV['RECLAIM_TOKEN']" 2>&1`
+        # Use env to unset RECLAIM_API_KEY before running ruby
+        `env -u RECLAIM_API_KEY ruby -I#{lib_path} -e "require 'reclaim'; puts ENV['RECLAIM_API_KEY']" 2>&1`
       end
 
       # Verify the .env file was loaded
@@ -1018,14 +1018,14 @@ class TestReclaimEnv < Minitest::Test
   end
 
   def test_reclaim_token_from_environment
-    # Verify that RECLAIM_TOKEN can be set and used
-    ENV['RECLAIM_TOKEN'] = 'test_token_value'
+    # Verify that RECLAIM_API_KEY can be set and used
+    ENV['RECLAIM_API_KEY'] = 'test_token_value'
 
     client = Reclaim::Client.new
     assert_equal 'test_token_value', client.instance_variable_get(:@token)
 
     # Clean up
-    ENV['RECLAIM_TOKEN'] = @original_token
+    ENV['RECLAIM_API_KEY'] = @original_token
   end
 end
 

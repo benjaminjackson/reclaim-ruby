@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2025-11-14
+
+### Added
+- Dotenv support for environment variable management
+- Automatic loading of `.env` files for API token configuration
+- Development dependency on `dotenv` gem (~> 2.8)
+
+### Changed
+- Renamed environment variable from `RECLAIM_TOKEN` to `RECLAIM_API_KEY` for clarity
+
 ## [0.1.0] - 2025-10-29
 
 ### Added
@@ -31,5 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **CLI**: Full-featured command-line interface
 - **Errors**: Custom exception hierarchy for better error handling
 
-[Unreleased]: https://github.com/benjaminjackson/reclaim-ruby/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/benjaminjackson/reclaim-ruby/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/benjaminjackson/reclaim-ruby/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/benjaminjackson/reclaim-ruby/releases/tag/v0.1.0

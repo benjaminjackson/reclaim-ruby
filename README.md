@@ -40,6 +40,25 @@ export RECLAIM_TOKEN='your_api_token_here'
 
 Get your API token from your [Reclaim.ai settings](https://app.reclaim.ai/settings/developer).
 
+### Using .env Files (Optional)
+
+If you have the `dotenv` gem installed, the library will automatically load environment variables from `.env` and `.env.local` files from your current working directory. This is helpful for local development:
+
+```bash
+# .env
+RECLAIM_TOKEN='your_api_token_here'
+```
+
+**For users of this gem**: If you're using reclaim-ruby as a library in your own project and want .env file support, add dotenv to your project's Gemfile:
+
+```ruby
+gem 'dotenv', '~> 2.8'
+```
+
+**For contributors**: dotenv is already included as a development dependency for working on this gem.
+
+**File precedence**: `.env.local` takes precedence over `.env` and is typically gitignored for local-only overrides. Environment variables already set in your shell take precedence over .env files.
+
 ## Usage
 
 ### Ruby Library

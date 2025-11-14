@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
+  gem 'dotenv', '~> 2.8'
   gem 'minitest', '~> 5.0'
   gem 'rake', '~> 13.0'
   gem 'yard', '~> 0.9'

@@ -28,5 +28,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   # No runtime dependencies - uses stdlib only
-  # Development dependencies are specified in Gemfile
+
+  # Development dependencies
+  spec.add_development_dependency 'dotenv', '~> 2.8'
+  spec.add_development_dependency 'minitest', '~> 5.0'
+  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'yard', '~> 0.9'
 end
